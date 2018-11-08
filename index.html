@@ -9,6 +9,12 @@
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
   <script src="index.js" defer></script>
+
+  <style>
+ td, th {
+    border: 1px solid black;
+}
+</style>
 </head>
 <body>
   <div id="vue-app">
@@ -22,7 +28,28 @@
 <template id="home-page">
   <div class="vue-component">
 
-    <h1>{{ message }}</h1>
+    <label  class="form-label">Keyword</label>
+    <input type="text" v-model="keywords" placeholder="keyword">
+    
+     
+
+    <button v-on:click="getIndKey()">Update</button>
+    <!-- <p v-for="keyword in keywords">{{ keyword.toUpperCase() }} </p> -->
+    <!-- <p v-for="indexKey in indexKeys">{{ indexKey }}</p> -->
+
+    <table>
+      <tr>
+        <th v-for="keyword in keywords">{{ keyword.toUpperCase() }}</th>
+      </tr>
+      <tr>
+        <td v-for="indexKey in indexKeys">{{ indexKey }}</td>
+      </tr>   
+
+    </table>
+
+
+    
+    <!-- <li v-for="indexKey in indexKeys" >{{ indexKey }}</li> -->
 
   </div>
 </template>
