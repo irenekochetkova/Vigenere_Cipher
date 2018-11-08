@@ -5,7 +5,7 @@ var HomePage = {
   data: function() {
     return {
       indexKeys: [],
-      alphabet: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+      alphabets: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
       keywords: []
       
     };
@@ -14,21 +14,18 @@ var HomePage = {
   methods: {
     getIndKey: function() {
       if (this.keywords) {
-    //     // this.keywords.push(this.keyword);
-        // this.keywords = keywords.split('');
       console.log(this.keywords);
-      // this.keywords = keywords.toUpperCase();
       var array = this.keywords.toUpperCase().split('');
       console.log(array);
-
-      // var newArray = array.map(el => this.alphabet.indexOf(el));
-      this.indexKeys = array.map(el => this.alphabet.indexOf(el));
-      
+      this.indexKeys = array.map(el => this.alphabets.indexOf(el));      
       console.log(this.indexKeys);
-      console.log(this.alphabet);
-    }
+      console.log(this.alphabets);
+      }
+    },
+    
+    
 
-    }
+
   },
   computed: {}
 };
