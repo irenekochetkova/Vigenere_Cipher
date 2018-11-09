@@ -18,12 +18,12 @@ var HomePage = {
       // var newWords = [];
 
       if (this.keywords) {
-        console.log(this.keywords);
+        // console.log(this.keywords);
         var array = this.keywords.toUpperCase().split('');
-        console.log(array);
+        // console.log(array);
         this.indexKeys = array.map(el => this.alphabets.indexOf(el));      
-        console.log(this.indexKeys);
-        console.log(this.alphabets);      
+        // console.log(this.indexKeys);
+        // console.log(this.alphabets);      
         }
       // for (var i = 0; i < this.keywords.length; i++) {
       //   var char = this.keywords[i].toUpperCase();
@@ -35,19 +35,17 @@ var HomePage = {
       // }
 
       this.newOrderAlphs = this.alphabets.slice(this.indexKeys[0]).concat(this.alphabets.slice(0, this.indexKeys[0])); 
-      console.log(this.indexKeys[0]);
-      console.log(this.newOrderAlphs);
+      // console.log(this.indexKeys[0]);
+      // console.log(this.newOrderAlphs);
 
     },
     
     getCipher: function(alphabet) {  
-        this.alphabet = alphabet;
-        console.log(alphabet);
+        this.alphabet = alphabet;        
         this.inputWords += alphabet;
-        
-     
-       // var newInd = this.alphabets.indexOf(this.inputWord) + this.indexKeys[i % this.indexKeys.length];
-       // this.inputWord = this.newOrderAlphs[newInd];
+        var len = this.inputWords.length;
+        this.newOrderAlphs = this.alphabets.slice(this.indexKeys[len % this.indexKeys.length]).concat(this.alphabets.slice(0, this.indexKeys[len % this.indexKeys.length]));
+       
     }
 
 
