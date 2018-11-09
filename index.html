@@ -11,9 +11,9 @@
   <script src="index.js" defer></script>
 
   <style>
- td, th {
-    border: 1px solid black;
-}
+    table, td, th {
+      border: 1px solid black;
+    }
 </style>
 </head>
 <body>
@@ -45,9 +45,24 @@
         <td v-for="indexKey in indexKeys">{{ indexKey }}</td>
       </tr>
     </table>
+<hr>
 
-    <button v-for="alphabet in alphabets">{{ alphabet }}</button>
+    <table>
+      <tr>
+        <th v-for="alphabet in alphabets"><button v-on:click="getCipher(alphabet)">{{ alphabet }}</button></th>
+      </tr>
+      <tr> 
+        <td v-for="newOrderAlph in newOrderAlphs">{{ newOrderAlph }}</td>
+      </tr>
+    </table>
+<hr>
+    
+    <input type="text" v-model="inputWords" placeholder="word">
 
-
+    <button v-on:click="">Clear</button>
+<hr>
+    <label  class="form-label">Cipher Text</label>
+    <input type="text" v-model="outputWords">
+    
   </div>
 </template>
