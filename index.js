@@ -35,6 +35,11 @@ var HomePage = {
       this.outputWords += this.newOrderAlphs[index]; 
       var len = this.inputWords.length;
       this.newOrderAlphs = this.alphabets.slice(this.indexKeys[len % this.indexKeys.length]).concat(this.alphabets.slice(0, this.indexKeys[len % this.indexKeys.length]));
+    },
+
+    deleteInputWords: function(inputWords) {
+  
+      this.inputWords = '';
     }
 
 
