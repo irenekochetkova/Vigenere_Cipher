@@ -4,65 +4,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My App</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400,700"> 
+  <title>My App</title>  
+ 
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.min.js"></script>
   <script src="index.js" defer></script>
-
-  <style>
-    table, td, th {
-      border: 1px solid black;
-    }
-</style>
 </head>
 <body>
   <div id="vue-app">
-
     <router-view></router-view>
-
   </div>
 </body>
 </html>
 
 <template id="home-page">
   <div class="vue-component">
-
-    <label  class="form-label">Keyword</label>
-    <input type="text" v-model="keywords" placeholder="keyword">
+    <div class="container">
+      <div class=config>
+        <h1 class="underline">Configuration</h1>
+        <div class="form-group"> 
+          <p>Keyword</p>          
+          <span v-if="errors.length">
+            <b>Please correct the following error(s):</b>
+            <ul>
+              <li v-for="error in errors">{{ error }}</li>
+            </ul>
+          </span>
+          <input type="text" 
+                 onkeypress="return /[a-zA-Z]/i.test(event.key)"  
+                 ref="my_input" class="form-input" 
+                 placeholder="enter keyword">
+          <button v-on:click="getIndKey()" 
+                  class="btn">
+                Update
+          </button>
+        </div>
+        <span><strong>* Keyword should be a single word between three and eight characters long</strong></span>
+        <table class="u-margin-top">
+          <tr>
+            <th class="cell" 
+                v-for="(keyword, index) in keywords" 
+                v-bind:index="index" 
+                v-bind:class="{'active' : index === activeEl} " >
+              {{ keyword.toUpperCase() }}
+            </th>
+          </tr>
+          <tr>
+            <td class="cell" 
+                v-for="(indexKey, index) in indexKeys" 
+                v-bind:index="index" 
+                v-bind:class="{'active' : index === activeEl} ">
+              {{ indexKey }}
+            </td>
+          </tr>
+        </table>
+      </div>
     
-     
+      <div class="config">
+        <h1 class="underline">Encoding</h1>
+        <div> 
+          <p>Source Text</p>
+          <table>
+            <tr>
+              <th class="cell-alph" 
+                  v-for="alphabet in alphabets">
+                  <button class="btn" 
+                          v-on:click="getCipher(alphabet)">
+                          {{ alphabet }}
+                  </button>
+              </th>
+            </tr>
+            <tr> 
+              <td class="cell" 
+                  v-for="newOrderAlph in newOrderAlphs">
+                  {{ newOrderAlph }}
+              </td>
+            </tr>
+          </table>
+        </div>
 
-    <button v-on:click="getIndKey()">Update</button>
-    <!-- <p v-for="keyword in keywords">{{ keyword.toUpperCase() }} </p> -->
-    <!-- <p v-for="indexKey in indexKeys">{{ indexKey }}</p> -->
-
-    <table>
-      <tr>
-        <th v-for="keyword in keywords">{{ keyword.toUpperCase() }}</th>
-      </tr>
-      <tr>
-        <td v-for="indexKey in indexKeys">{{ indexKey }}</td>
-      </tr>
-    </table>
-<hr>
-
-    <table>
-      <tr>
-        <th v-for="alphabet in alphabets"><button v-on:click="getCipher(alphabet)">{{ alphabet }}</button></th>
-      </tr>
-      <tr> 
-        <td v-for="newOrderAlph in newOrderAlphs">{{ newOrderAlph }}</td>
-      </tr>
-    </table>
-<hr>
-    
-    <input type="text" v-model="inputWords">
-
-    <button v-on:click="deleteInputWords()">Clear</button>
-<hr>
-    <label  class="form-label">Cipher Text</label>
-    <input type="text" v-model="outputWords">
-    
+        <div class="u-margin-top">
+          <input  :readonly="shouldDisable" 
+                  class="form-input" 
+                  type="text" 
+                  v-model="inputWords">
+          <button class="btn" 
+                  v-on:click="deleteInputWords()">
+                  Clear
+          </button>
+        </div>
+        
+        <div class="u-margin-top">
+          <p>Cipher Text</p>
+          <input :readonly="shouldDisable" 
+                 class="form-input" 
+                 type="text" 
+                 v-model="outputWords">
+        </div>        
+      </div>    
+    </div>
   </div>
 </template>
