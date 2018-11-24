@@ -47,6 +47,7 @@ var HomePage = {
       this.inputWords = '';
       this.outputWords = '';
       this.activeEl = 0;
+      this.newOrderAlphs = this.alphabets.slice(this.indexKeys[0]).concat(this.alphabets.slice(0, this.indexKeys[0])); 
     }
   }  
 };
